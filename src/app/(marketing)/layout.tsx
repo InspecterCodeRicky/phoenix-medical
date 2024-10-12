@@ -15,7 +15,9 @@ const MainLayout = ({
   const { isAuthenticated, isLoading } = useConvexAuth();
   const pathname = usePathname();
 
-  if (process.env.NODE_ENV == "development" && isLoading) {
+  const statusApp = process.env.CURRENT_APP_STATUS;
+
+  if (statusApp !== "live" && isLoading) {
     return (
       <div className="flex justify-center items-center h-screen w-full">
         <Spinner size="lg" />
@@ -24,7 +26,7 @@ const MainLayout = ({
   }
   if (
     !isAuthenticated &&
-    process.env.NODE_ENV == "development" &&
+    statusApp !== "live" &&
     !pathname.includes("/sign-in")
   ) {
     console.log("isAuthenticated 2", isAuthenticated);
@@ -33,15 +35,12 @@ const MainLayout = ({
 
   return (
     <div>
-      {(isAuthenticated && process.env.NODE_ENV == "development") ||
-      process.env.NODE_ENV != "development" ? (
+      {(isAuthenticated && statusApp !== "live") || statusApp == "live" ? (
         <Header />
       ) : null}
-
       {children}
 
-      {(isAuthenticated && process.env.NODE_ENV == "development") ||
-      process.env.NODE_ENV != "development" ? (
+      {(isAuthenticated && statusApp !== "live") || statusApp == "live" ? (
         <Footer />
       ) : null}
     </div>
