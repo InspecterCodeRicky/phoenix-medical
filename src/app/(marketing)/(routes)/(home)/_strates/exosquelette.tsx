@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CounterText from "../_components/counter";
+import CounterText from "../../../_components/counter";
 import { motion } from "framer-motion";
 import fadeIn from "@/lib/variants-motion";
 import { useMediaQuery } from "usehooks-ts";

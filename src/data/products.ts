@@ -53,3 +53,5 @@ export const products: ProductType[] = [
     status: "published",
   },
 ];
+
+export const tags = ["Tout", "Fauteuils", "Repose-pieds", "Repose-jambes"]

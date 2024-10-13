@@ -44,7 +44,7 @@ const Footer = () => {
                   href="/devis"
                   className={cn(
                     `relative text-sm text-muted-foreground font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
-                      pathname == "/devis" && "text-white after:scale-x-50"
+                      pathname == "/devis" && "text-white after:scale-x-100"
                     }`
                   )}
                 >
@@ -60,7 +60,7 @@ const Footer = () => {
                   href="/contact"
                   className={cn(
                     `relative text-sm text-muted-foreground font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
-                      pathname == "/contact" && "text-white after:scale-x-50"
+                      pathname == "/contact" && "text-white after:scale-x-100"
                     }`
                   )}
                 >
@@ -70,7 +70,7 @@ const Footer = () => {
                   href="/prise-rdv"
                   className={cn(
                     `relative text-sm text-muted-foreground font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
-                      pathname == "/prise-rdv" && "text-white after:scale-x-50"
+                      pathname == "/prise-rdv" && "text-white after:scale-x-100"
                     }`
                   )}
                 >
@@ -94,7 +94,7 @@ const Footer = () => {
                   href="/contact"
                   className={cn(
                     `relative text-sm text-muted-foreground font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
-                      pathname == "/contact" && "text-white after:scale-x-50"
+                      pathname == "/contact" && "text-white after:scale-x-100"
                     }`
                   )}
                 >
@@ -104,7 +104,7 @@ const Footer = () => {
                   href="/prise-rdv"
                   className={cn(
                     `relative text-sm text-muted-foreground font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
-                      pathname == "/prise-rdv" && "text-white after:scale-x-50"
+                      pathname == "/prise-rdv" && "text-white after:scale-x-100"
                     }`
                   )}
                 >
@@ -120,7 +120,7 @@ const Footer = () => {
                   href="/conditions-generales"
                   className={cn(
                     `relative text-sm text-muted-foreground font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
-                      pathname == "/contact" && "text-white after:scale-x-50"
+                      pathname == "/contact" && "text-white after:scale-x-100"
                     }`
                   )}
                 >

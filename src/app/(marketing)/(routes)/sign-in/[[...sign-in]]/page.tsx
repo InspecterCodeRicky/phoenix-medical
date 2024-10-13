@@ -1,7 +1,5 @@
 "use client";
-// import { useState } from "react";
 import { useSignIn } from "@clerk/clerk-react";
-// import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,14 +18,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import { useConvexAuth } from "convex/react";
 import { Eye, EyeOff } from "lucide-react";
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Cette adresse email est invalide" }),
-  password: z.string().min(2, { message: "Doit avoir au moins 2 caractères" }),
+  email: z.string({ message: "Ce champs est requis" }).email({ message: "Cette adresse email est invalide" }),
+  password: z.string({ message: "Ce champs est requis" }).min(2, { message: "Doit avoir au moins 2 caractères" }),
 });
 
 const Page = () => {

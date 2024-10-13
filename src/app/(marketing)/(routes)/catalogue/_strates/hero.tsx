@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import CounterText from "../_components/counter";
 
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants-motion";
@@ -10,9 +9,24 @@ import { fadeIn } from "@/lib/variants-motion";
 const Hero = () => {
   return (
     <div className="relative">
-      <div className="py-20 md:py-32 before:content-[''] before:absolute before:top-0 before:z-0 before:h-full before:w-full  before:max-w-full lg:before:max-w-[70%] before:bg-card-foreground">
-        <div className="container relative grid lg:grid-cols-2 gap-x-5 gap-y-10">
-          <div>
+      <div className="py-20 md:py-32 before:content-[''] before:absolute before:top-0 before:right-0 before:z-0 before:h-full before:w-full  before:max-w-full lg:before:max-w-[70%] before:bg-card-foreground">
+        <div className="container relative grid lg:grid-cols-2 gap-x-20 gap-y-10">
+          <motion.div
+            variants={fadeIn("up", 0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.7 }}
+            className="p-0 w-full flex justify-center items-center"
+          >
+            <Image
+              className="rounded-xl"
+              src="/img/hero-catalogue.png"
+              width={1200}
+              height={1200}
+              alt="hero"
+            />
+          </motion.div>
+          <div className="flex flex-col justify-center">
             <motion.h1
               variants={fadeIn("down", 0.2)}
               initial="hidden"
@@ -20,7 +34,7 @@ const Hero = () => {
               viewport={{ once: true, amount: 0.7 }}
               className="uppercase text-3xl font-bold md:w-2/3"
             >
-              Nos solutions ergonomiques
+              Catalogue de matériel ergonomique sur mesure
             </motion.h1>
             <motion.p
               variants={fadeIn("down", 0.3)}
@@ -47,43 +61,12 @@ const Hero = () => {
                   href="/catalogue"
                   className="flex items-center gap-2 hover:gap-5 transition-all"
                 >
-                  Voir notre catalogue
+                  Prendre un RDV
                   <MoveRight />
                 </Link>
               </Button>
             </motion.div>
-            <motion.div
-              variants={fadeIn("down", 0.5)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.7 }}
-              className="grid grid-cols-2 gap-5 mt-10"
-            >
-              <div>
-                <CounterText start={0} end={50} prefix="+" height={40} />
-                <p className="text-muted-foreground tracking-[.2rem]">Produits</p>
-              </div>
-              <div>
-                <CounterText start={0} end={100} suffix="%" height={40} />
-                <p className="text-muted-foreground tracking-[.2rem]">Personnalisable</p>
-              </div>
-            </motion.div>
           </div>
-          <motion.div
-            variants={fadeIn("up", 0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.7 }}
-            className="p-0 w-full flex justify-center items-center"
-          >
-            <Image
-              className="rounded-xl"
-              src="/img/hero.png"
-              width={1200}
-              height={1200}
-              alt="hero"
-            />
-          </motion.div>
         </div>
       </div>
     </div>

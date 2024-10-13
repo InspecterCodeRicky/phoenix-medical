@@ -19,7 +19,7 @@ function NotFound() {
             </h2>
           </div>
           <Button variant="outline" size="lg" asChild>
-            <Link href="/">Retourne à l'accueil</Link>
+            <Link href="/">Retournez à l'accueil</Link>
           </Button>
         </div>
       </div>
