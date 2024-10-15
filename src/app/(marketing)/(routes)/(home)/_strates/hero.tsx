@@ -41,7 +41,9 @@ const Hero = () => {
               viewport={{ once: true, amount: 0.7 }}
               className="flex flex-wrap gap-5 items-center mt-5"
             >
-              <Button className="md:w-fit w-full">Demandez un devis</Button>
+              <Button className="md:w-fit w-full" asChild>
+                <Link href="/devis">Demandez un devis</Link>
+              </Button>
               <Button className="md:w-fit w-full" variant="outline">
                 <Link
                   href="/catalogue"

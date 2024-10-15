@@ -1,11 +1,12 @@
 "use client";
 
-import { Spinner } from "@/components/spinner";
 import { useConvexAuth } from "convex/react";
 
+import { Spinner } from "@/components/spinner";
 import { redirect, usePathname } from "next/navigation";
-import Header from "./_components/header";
-import Footer from "./_components/footer";
+import Header from "@/app/(marketing)/_components/header";
+import Footer from "@/app/(marketing)/_components/footer";
+import MenuMobile from "@/app/(marketing)/_components/menuMobile";
 
 const MainLayout = ({
   children,
@@ -34,14 +35,17 @@ const MainLayout = ({
   }
 
   return (
-    <div>
+    <div className="relative">
       {(isAuthenticated && statusApp !== "live") || statusApp == "live" ? (
         <Header />
       ) : null}
       {children}
 
       {(isAuthenticated && statusApp !== "live") || statusApp == "live" ? (
-        <Footer />
+        <>
+          <MenuMobile />
+          <Footer />
+        </>
       ) : null}
     </div>
   );

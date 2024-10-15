@@ -71,7 +71,7 @@ const Exosquelette = () => {
         >
           <Image
             className="rounded-xl object-contain h-full"
-            src="/img/products/exosquelette.png"
+            src="/img/products/exosquelette-1.png"
             width={500}
             height={500}
             alt="exosquelette"

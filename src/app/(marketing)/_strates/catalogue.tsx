@@ -76,8 +76,8 @@ const Catalogue = ({ displayAll = false }: { displayAll?: Boolean }) => {
         </motion.div>
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7">
-        {products.map((p, index) => {
-          if ((!displayAll && index <= 4) || displayAll) {
+        {products.filter(el=> selectedTag== "Tout" || el.tags.includes(selectedTag)).map((p, index) => {
+          if ((!displayAll && index < 4) || displayAll) {
             return <CardProduct key={p.ref} product={p} />;
           }
         })}

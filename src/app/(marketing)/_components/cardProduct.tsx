@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const CardProduct = ({ product }: { product: ProductType }) => {
@@ -12,7 +13,7 @@ const CardProduct = ({ product }: { product: ProductType }) => {
     setFavorite(!favorite);
   };
   return (
-    <div className="relative bg-muted p-4 rounded-xl h-full">
+    <div className="relative bg-muted p-4 rounded-xl h-full transition-transform duration-300 hover:scale-105 hover:shadow-lg">
       <div
         role="button"
         onClick={handleOnClick}
@@ -21,24 +22,33 @@ const CardProduct = ({ product }: { product: ProductType }) => {
         `}
       >
         <Heart
-          className={cn(`transition-colors duration-300 ${favorite ? "text-white" : "text-black"}`)}
+          className={cn(
+            `transition-colors duration-300 ${favorite ? "text-white" : "text-black"}`
+          )}
           fill={favorite ? "white" : "black"}
         />
       </div>
-      <Image
-        src={product.images![0].url}
-        width={1000}
-        height={1000}
-        alt={product.title}
-      />
-      <div>
-        <p className="text-sm md:text-lg font-bold"> {product.title} </p>
-        {product.shortDescription && (
-          <p className="text-xs md:text-base text-muted-foreground line-clamp-1">
-            {product.shortDescription}{" "}
+      <Link href={`/catalogue/${product.ref}`}>
+        <div className="h-44 md:h-72">
+          <Image
+            src={product.images![0].url}
+            width={600}
+            height={800}
+            alt={product.title}
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <div>
+          <p className="text-sm md:text-lg font-bold truncate">
+            {product.title}
           </p>
-        )}
-      </div>
+          {product.shortDescription && (
+            <p className="text-xs md:text-base text-muted-foreground line-clamp-1">
+              {product.shortDescription}
+            </p>
+          )}
+        </div>
+      </Link>
     </div>
   );
 };

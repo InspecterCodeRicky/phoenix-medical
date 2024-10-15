@@ -1,5 +1,4 @@
 "use server";
-import fs from "fs";
 import nodemailer from "nodemailer";
 import React from "react";
 import { render } from "@react-email/components";
@@ -7,6 +6,10 @@ import EmailDevis, {
   QuoteRequestEmail,
 } from "@/app/(marketing)/_components/EmailDevis";
 import EmailContact, { ContactRequestEmail } from "@/app/(marketing)/_components/EmailContact";
+
+const { MailtrapTransport } = require("mailtrap");
+
+const TOKEN = "74a753a96283d807cd077307cc19e289";
 
 export async function sendMail({
   from,
@@ -39,13 +42,18 @@ export async function sendMail({
 
   const { SMTP_EMAIL, SMTP_PASSWORD } = process.env;
 
-  const transport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: SMTP_EMAIL,
-      pass: SMTP_PASSWORD,
-    },
-  });
+  // const transport = nodemailer.createTransport({
+  //   service: "gmail",
+  //   auth: {
+  //     user: SMTP_EMAIL,
+  //     pass: SMTP_PASSWORD,
+  //   },
+  // });
+  const transport = nodemailer.createTransport(
+    MailtrapTransport({
+      token: TOKEN,
+    })
+  );
   try {
     const testResult = await transport.verify();
     console.log(testResult);
@@ -55,9 +63,16 @@ export async function sendMail({
   }
 
   try {
+    const sender = {
+      address: "hello@demomailtrap.com",
+      name: "Mailtrap Test",
+    };
+    const recipients = [
+      "ideal.conception20@gmail.com",
+    ];
     const sendResult = await transport.sendMail({
-      from: from,
-      to: SMTP_EMAIL,
+      from: sender,
+      to: recipients,
       subject,
       html: emailHtml,
       sender: "Phoenix Médical",

@@ -88,8 +88,10 @@ const Header = () => {
     >
       <div className="container py-5 flex justify-between items-center">
         <div className="flex items-end gap-5">
-          <MenuBurger />
-          <Image src="/img/logo.png" width={120} height={120} alt="logo" />
+          {/* <MenuBurger /> */}
+          <Link href="/">
+            <Image src="/img/logo.png" width={120} height={120} alt="logo" />
+          </Link>
         </div>
         <nav className="hidden md:flex items-center gap-5">
           {MenuList.map((menu: any, index) => (

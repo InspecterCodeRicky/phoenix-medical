@@ -10,6 +10,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '480px', // Définissez ici la taille souhaitée pour xs
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+      },
       container: {
         center: true,
         padding: "2rem",
