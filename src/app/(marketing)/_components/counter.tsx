@@ -17,31 +17,6 @@ const CounterText = ({
 }) => {
   const [focus, setFocus] = useState(false);
   return (
-    // <></> 
-    // <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
-    //   {({ isVisible }: { isVisible: boolean }) => (
-    //     <div style={{ height: height }}>
-    //       {isVisible ? (
-    //         <CountUp
-    //           start={start}
-    //           end={end}
-    //           duration={2.75}
-    //           prefix={prefix}
-    //           suffix={suffix}
-    //         >
-    //           {({ countUpRef, start }) => (
-    //             <div>
-    //               <span
-    //                 ref={countUpRef}
-    //                 className="uppercase text-3xl font-thin"
-    //               />
-    //             </div>
-    //           )}
-    //         </CountUp>
-    //       ) : null}
-    //     </div>
-    //   )}
-    // </VisibilitySensor>
     <CountUp
       start={focus ? start : undefined}
       end={end}
@@ -50,15 +25,15 @@ const CounterText = ({
       suffix={suffix}
     >
       {({ countUpRef }) => (
-        <VisibilitySensor
-          onChange={(isVisible: boolean) => {
-            if (isVisible) {
-              setFocus(true);
-            }
-          }}
-        >
-          <span ref={countUpRef} className="uppercase text-3xl font-thin" />
-        </VisibilitySensor>
+        // <VisibilitySensor
+        //   onChange={(isVisible: boolean) => {
+        //     if (isVisible) {
+        //       setFocus(true);
+        //     }
+        //   }}
+        // >
+        // </VisibilitySensor>
+        <span ref={countUpRef} className="uppercase text-3xl font-thin" />
       )}
     </CountUp>
   );

@@ -2,10 +2,7 @@
 
 import { cn } from "@/lib/utils";
 
-import { SignOutButton } from "@clerk/clerk-react";
-import { Authenticated } from "convex/react";
-
-import { AlignJustify, CalendarFold, LogOut, Phone } from "lucide-react";
+import { AlignJustify, CalendarFold, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -55,7 +52,13 @@ const Header = () => {
           </SheetTrigger>
           <SheetContent side={"left"}>
             <SheetHeader>
-              <Image src="/img/logo.png" width={120} height={120} alt="logo" />
+              <Image
+                className="w-full h-full object-contain"
+                src="/img/logo.png"
+                width={120}
+                height={120}
+                alt="logo"
+              />
             </SheetHeader>
             <div className="flex flex-col gap-5 mt-10">
               {MenuList.map((menu: any, index) => (
@@ -90,7 +93,13 @@ const Header = () => {
         <div className="flex items-end gap-5">
           {/* <MenuBurger /> */}
           <Link href="/">
-            <Image src="/img/logo.png" width={120} height={120} alt="logo" />
+            <Image
+              className="w-full h-full object-contain"
+              src="/img/logo.png"
+              width={120}
+              height={120}
+              alt="logo"
+            />
           </Link>
         </div>
         <nav className="hidden md:flex items-center gap-5">
@@ -115,14 +124,6 @@ const Header = () => {
           <div className="flex justify-center items-center cursor-pointer rounded-full h-6 w-6 border border-muted-foreground text-muted-foreground hover:bg-muted-foreground/10">
             <CalendarFold className="h-4 w-4" />
           </div>
-          <Authenticated>
-            <SignOutButton>
-              {/* <UserButton /> */}
-              <div className="flex justify-center items-center cursor-pointer rounded-full h-6 w-6 border border-muted-foreground text-muted-foreground hover:bg-muted-foreground/10">
-                <LogOut className="h-3 w-3" />
-              </div>
-            </SignOutButton>
-          </Authenticated>
         </div>
       </div>
     </div>

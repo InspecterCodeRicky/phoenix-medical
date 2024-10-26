@@ -44,6 +44,7 @@ const Hero = () => {
               <Button className="md:w-fit w-full" asChild>
                 <Link href="/devis">Demandez un devis</Link>
               </Button>
+             
               <Button className="md:w-fit w-full" variant="outline">
                 <Link
                   href="/catalogue"
@@ -76,13 +77,15 @@ const Hero = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.7 }}
-            className="p-0 w-full flex justify-center items-center"
+            className="p-0 w-full flex justify-center items-center max-h-fit"
           >
             <Image
-              className="rounded-xl"
-              src="/img/hero.png"
-              width={1200}
-              height={1200}
+              className="rounded-xl w-full h-full object-contain"
+              src="/img/hero.jpeg"
+              priority={false}
+              quality={75}
+              width={500}
+              height={300}
               alt="hero"
             />
           </motion.div>

@@ -21,6 +21,9 @@ import SuccessModal from "../_components/succes";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/components/spinner";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { MessageStatus } from "@/app/types/message";
 
 const formSchema = z.object({
   name: z
@@ -42,6 +45,8 @@ const DevisForm = () => {
   const [openModal, setOpenModal] = useState(false);
   const [isLoaded, setiIsLoaded] = useState(false);
 
+  const sendRequest = useMutation(api.devis.sendRequest);
+
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,7 +56,6 @@ const DevisForm = () => {
   const HandleChangeModal = (open: boolean) => {
     setOpenModal(open);
     if (!open) {
-      console.log("HandleChangeModal", open);
       router.push("/");
     }
   };
@@ -59,16 +63,19 @@ const DevisForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (isLoaded) return;
     setiIsLoaded(true);
-    await sendMail({
-      from: values.email,
-      subject: "Phoenix Médical",
-      data: values,
-      typeEmail: "devis",
-    })
-      .then((_) => {
-        HandleChangeModal(true);
-      })
-      .catch((_) => {});
+    await sendRequest({...values, status : MessageStatus.New}).then(() => {
+      HandleChangeModal(true);
+    });
+    // await sendMail({
+    //   from: values.email,
+    //   subject: "Phoenix Médical",
+    //   data: values,
+    //   typeEmail: "devis",
+    // })
+    //   .then((_) => {
+    //     HandleChangeModal(true);
+    //   })
+    //   .catch((_) => {});
     setiIsLoaded(false);
   };
 

@@ -2,11 +2,8 @@ import Image from "next/image";
 import CounterText from "../../../_components/counter";
 import { motion } from "framer-motion";
 import fadeIn from "@/lib/variants-motion";
-import { useMediaQuery } from "usehooks-ts";
 
 const Exosquelette = () => {
-  const matches = useMediaQuery('(min-width: 768px)')
-
   return (
     <div className="relative mt-36 bg-muted">
       <div className="grid md:grid-cols-2 gap-5">
@@ -25,7 +22,6 @@ const Exosquelette = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="text-muted-foreground"
           >
             Les exosquelettes s’adaptent à chaque besoin, offrant des solutions
             personnalisées pour améliorer la performance et réduire la fatigue.
@@ -39,44 +35,46 @@ const Exosquelette = () => {
             viewport={{ once: true, amount: 0.3 }}
             className="mt-5"
           >
-            <p className="text-xl font-semibold text-muted-foreground">
+            <p className="text-xl font-semibold ">
               Les TMS les plus fréquents 🤕
             </p>
             <div className="grid grid-cols-2 gap-5 mt-5">
               <div>
                 <CounterText start={0} end={58} suffix="%" height={40} />
-                <p className="text-muted-foreground tracking-[.2rem]">Nuque</p>
+                <p className="tracking-[.2rem]">Nuque</p>
               </div>
               <div>
                 <CounterText start={0} end={69} suffix="%" height={40} />
-                <p className="text-muted-foreground tracking-[.2rem]">Dos</p>
+                <p className="tracking-[.2rem]">Dos</p>
               </div>
               <div>
                 <CounterText start={0} end={15} suffix="%" height={40} />
-                <p className="text-muted-foreground tracking-[.2rem]">Coudes</p>
+                <p className="tracking-[.2rem]">Coudes</p>
               </div>
               <div>
                 <CounterText start={0} end={38} suffix="%" height={40} />
-                <p className="text-muted-foreground tracking-[.2rem]">Genoux</p>
+                <p className="tracking-[.2rem]">Genoux</p>
               </div>
             </div>
           </motion.div>
         </div>
-        <motion.div
-          variants={fadeIn(matches ? "left" : "up", 0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.7 }}
-          className="w-full flex justify-center items-center bg-[#E6E6E6]"
-        >
-          <Image
-            className="rounded-xl object-contain h-full"
-            src="/img/products/exosquelette-1.png"
-            width={500}
-            height={500}
-            alt="exosquelette"
-          />
-        </motion.div>
+        <div className="bg-[#E6E6E6] flex justify-center items-center ">
+          <motion.div
+            variants={fadeIn("up", 0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="flex justify-center items-center max-h-fit"
+          >
+            <Image
+              className="w-full h-full object-contain"
+              src="/img/products/exosquelette-1.png"
+              width={300}
+              height={300}
+              alt="exosquelette"
+            />
+          </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ const CardProduct = ({ product }: { product: ProductType }) => {
     <div className="relative bg-muted p-4 rounded-xl h-full transition-transform duration-300 hover:scale-105 hover:shadow-lg">
       <div
         role="button"
+        aria-label="favorite"
         onClick={handleOnClick}
         className={`p-2 transition-colors duration-500 absolute top-2 right-2 h-8 w-8 rounded-full flex justify-center items-center
             ${favorite ? "bg-primary" : "bg-white"}
@@ -43,7 +44,7 @@ const CardProduct = ({ product }: { product: ProductType }) => {
             {product.title}
           </p>
           {product.shortDescription && (
-            <p className="text-xs md:text-base text-muted-foreground line-clamp-1">
+            <p className="text-xs md:text-base line-clamp-1">
               {product.shortDescription}
             </p>
           )}

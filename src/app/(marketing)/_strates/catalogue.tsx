@@ -26,7 +26,7 @@ const Catalogue = ({ displayAll = false }: { displayAll?: Boolean }) => {
         viewport={{ once: true, amount: 0.3 }}
         className="w-full flex flex-col items-center justify-center gap-5"
       >
-        {displayAll ? (
+        {!displayAll ? (
           <Link
             aria-disabled
             href="/catalogue"
@@ -62,6 +62,7 @@ const Catalogue = ({ displayAll = false }: { displayAll?: Boolean }) => {
                 <div
                   key={`tag-${index}`}
                   role="button"
+                  aria-label={tag}
                   onClick={() => handleSelectTag(tag)}
                   className={cn(
                     `select-none transition duration-300 rounded-full px-4 py-1 ${selectedTag == tag ? "bg-primary text-white" : "hover:bg-muted"}`

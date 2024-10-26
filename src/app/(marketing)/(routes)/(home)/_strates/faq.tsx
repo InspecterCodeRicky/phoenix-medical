@@ -34,7 +34,7 @@ const FAQ = () => {
 
   return (
     <div className="container mt-36">
-      <motion.p
+      <motion.h2
         variants={fadeIn("up", 0.3)}
         initial="hidden"
         whileInView="show"
@@ -42,7 +42,7 @@ const FAQ = () => {
         className="text-5xl font-semibold md:text-center mb-2"
       >
         FAQ ?
-      </motion.p>
+      </motion.h2>
       <motion.p
         variants={fadeIn("up", 0.4)}
         initial="hidden"

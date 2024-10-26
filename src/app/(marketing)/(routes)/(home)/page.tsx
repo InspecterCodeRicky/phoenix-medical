@@ -10,7 +10,6 @@ import FAQ from "@/app/(marketing)/(routes)/(home)/_strates/faq";
 function Page() {
   return (
     <div>
-     
       <div className="overflow-hidden">
         <Hero />
         <BenefitsErgo />

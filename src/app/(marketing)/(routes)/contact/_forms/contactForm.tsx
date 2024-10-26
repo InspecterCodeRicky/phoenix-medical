@@ -21,6 +21,9 @@ import { useRouter } from "next/navigation";
 import SuccessModal from "../_components/succes";
 import { sendMail } from "@/lib/mail";
 import { Spinner } from "@/components/spinner";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { MessageStatus } from "@/app/types/message";
 
 const formSchema = z.object({
   name: z
@@ -42,6 +45,8 @@ const ContactForm = () => {
   const [openModal, setOpenModal] = useState(false);
   const [isLoaded, setiIsLoaded] = useState(false);
 
+  const sendMessage = useMutation(api.messages.send);
+
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,7 +56,6 @@ const ContactForm = () => {
   const HandleChangeModal = (open: boolean) => {
     setOpenModal(open);
     if (!open) {
-      console.log("HandleChangeModal", open);
       router.push("/");
     }
   };
@@ -59,16 +63,28 @@ const ContactForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (isLoaded) return;
     setiIsLoaded(true);
-    await sendMail({
-      from: values.email,
-      subject: "Phoenix Médical",
-      data: values,
-      typeEmail: "contact",
+
+    await sendMessage({
+      body : values.message,
+      email: values.email,
+      motif : values.motif,
+      name: values.name!,
+      phone: values.phone!,
+      status: MessageStatus.New,
+    }).then(()=> {
+      HandleChangeModal(true);
     })
-      .then((_) => {
-        HandleChangeModal(true);
-      })
-      .catch((_) => {});
+
+    // await sendMail({
+    //   from: values.email,
+    //   subject: "Phoenix Médical",
+    //   data: values,
+    //   typeEmail: "contact",
+    // })
+    //   .then((_) => {
+    //     HandleChangeModal(true);
+    //   })
+    //   .catch((_) => {});
     setiIsLoaded(false);
   };
 
