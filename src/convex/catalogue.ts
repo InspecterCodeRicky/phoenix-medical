@@ -1,13 +1,11 @@
-import { paginationOptsValidator } from "convex/server";
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
+import { filter } from "convex-helpers/server/filter";
+
 export const list = query({
   handler: async (ctx) => {
-    const list = ctx.db
-      .query("catalogue")
-      .order("desc")
-      .collect()
+    const list = ctx.db.query("catalogue").collect();
     return list;
   },
 });
@@ -31,8 +29,8 @@ export const create = mutation({
   },
   handler: async (ctx, args) => {
     const catalogueId = await ctx.db.insert("catalogue", { ...args });
-    const catalague = await ctx.db.get(catalogueId);
-    return catalague;
+    const catalogue = await ctx.db.get(catalogueId);
+    return catalogue;
   },
 });
 
@@ -55,24 +53,40 @@ export const update = mutation({
     status: v.string(),
   },
   handler: async (ctx, args) => {
-    const catalague = await ctx.db.get(args.catalogueId);
-    if (catalague == null) {
+    const catalogue = await ctx.db.get(args.catalogueId);
+    if (catalogue == null) {
       throw new Error("Not found");
     }
     await ctx.db.patch(args.catalogueId, { ...args });
 
-    return catalague;
+    return catalogue;
   },
 });
 
 export const getById = query({
   args: { catalogueId: v.id("catalogue") },
   handler: async (ctx, args) => {
-    const catalague = await ctx.db.get(args.catalogueId);
-    if (catalague == null) {
-      throw new Error("Not found");
-    }
+    try {
+      const catalogue = await ctx.db.get(args.catalogueId);
+      return catalogue;
+    } catch (error) {}
+    return null;
+  },
+});
 
-    return catalague;
+export const getSimilarProdByTags = query({
+  args: { catalogueId: v.id("catalogue") },
+  handler: async (ctx, args) => {
+    try {
+      const catalogue = await ctx.db.get(args.catalogueId);
+      const tags = catalogue?.tags;
+      const cataloguesSimilars = filter(
+        ctx.db.query("catalogue"),
+        (q) =>
+          q._id != args.catalogueId && q.tags.some((tag) => tags?.includes(tag))
+      ).take(4);
+      return cataloguesSimilars;
+    } catch (error) {}
+    return [];
   },
 });

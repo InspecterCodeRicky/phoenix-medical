@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { AlignJustify, CalendarFold, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import {
@@ -17,6 +17,7 @@ import {
 
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [largeHeader, setLargeHeader] = useState(true);
 
   const MenuList = [
@@ -41,44 +42,9 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const MenuBurger = () => {
-    const [sheetOpen, setSheetOpen] = useState<boolean>(false);
-
-    return (
-      <div className="flex items-center md:hidden">
-        <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-          <SheetTrigger className="">
-            <AlignJustify strokeWidth={1.6} />
-          </SheetTrigger>
-          <SheetContent side={"left"}>
-            <SheetHeader>
-              <Image
-                className="w-full h-full object-contain"
-                src="/img/logo.png"
-                width={120}
-                height={120}
-                alt="logo"
-              />
-            </SheetHeader>
-            <div className="flex flex-col gap-5 mt-10">
-              {MenuList.map((menu: any, index) => (
-                <Link
-                  key={`menu-nav-${index}`}
-                  href={menu.path}
-                  className={cn(
-                    `relative text-sm text-muted-foreground font-medium hover:text-primary w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
-                      pathname == menu.path && "text-primary after:scale-x-100"
-                    }`
-                  )}
-                >
-                  {menu.libelle}
-                </Link>
-              ))}
-            </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-    );
+  const resetScrollPosition = () => {
+    console.log("dede");
+    sessionStorage.setItem("scrollPosition", "0");
   };
 
   return (
@@ -92,7 +58,13 @@ const Header = () => {
       <div className="container py-5 flex justify-between items-center">
         <div className="flex items-end gap-5">
           {/* <MenuBurger /> */}
-          <Link href="/">
+          <div
+            role="button"
+            onClick={() => {
+              router.push("/");
+              resetScrollPosition();
+            }}
+          >
             <Image
               className="w-full h-full object-contain"
               src="/img/logo.png"
@@ -100,13 +72,17 @@ const Header = () => {
               height={120}
               alt="logo"
             />
-          </Link>
+          </div>
         </div>
         <nav className="hidden md:flex items-center gap-5">
           {MenuList.map((menu: any, index) => (
-            <Link
+            <div
               key={`menu-nav-${index}`}
-              href={menu.path}
+              role="button"
+              onClick={() => {
+                router.push(menu.path);
+                resetScrollPosition();
+              }}
               className={cn(
                 `relative text-sm text-muted-foreground font-medium hover:text-primary w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
                   pathname == menu.path && "text-primary after:scale-x-50"
@@ -114,7 +90,7 @@ const Header = () => {
               )}
             >
               {menu.libelle}
-            </Link>
+            </div>
           ))}
         </nav>
         <div className="flex gap-5">

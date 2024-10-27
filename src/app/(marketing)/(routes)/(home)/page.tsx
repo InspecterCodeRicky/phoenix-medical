@@ -14,7 +14,7 @@ function Page() {
         <Hero />
         <BenefitsErgo />
         <Exosquelette />
-        <Catalogue />
+        <Catalogue DontSavedScrollPosition={true}/>
         <Amenagement />
         <FAQ />
       </div>

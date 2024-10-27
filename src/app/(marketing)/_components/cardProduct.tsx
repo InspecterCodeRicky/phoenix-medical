@@ -1,12 +1,18 @@
 "use client";
 
+import { Doc, Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import {  useState } from "react";
 
-const CardProduct = ({ product }: { product: ProductType }) => {
+const CardProduct = ({
+  product,
+  goToDetails,
+}: {
+  product: Doc<"catalogue">;
+  goToDetails?: (catalogueId: Id<"catalogue">) => void;
+}) => {
   const [favorite, setFavorite] = useState(false);
 
   const handleOnClick = () => {
@@ -29,7 +35,13 @@ const CardProduct = ({ product }: { product: ProductType }) => {
           fill={favorite ? "white" : "black"}
         />
       </div>
-      <Link href={`/catalogue/${product.ref}`}>
+      <div role="button" onClick={() => {
+        if(typeof goToDetails == 'function'){
+          goToDetails(product._id)
+        } else {
+          
+        }
+      }}>
         <div className="h-44 md:h-72">
           <Image
             src={product.images![0].url}
@@ -49,7 +61,7 @@ const CardProduct = ({ product }: { product: ProductType }) => {
             </p>
           )}
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

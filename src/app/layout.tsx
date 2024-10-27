@@ -4,11 +4,20 @@ import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://phoenixmedical.fr'),
+  metadataBase: new URL("https://phoenixmedical.fr"),
   title: {
     default: "Phoenix Médical",
     template: "%s | Phoenix Médical",
   },
+  keywords: [
+    "Chaises ergonimiques",
+    "Chaises ergonimiques guadeloupe",
+    "Guadeloupe",
+    "ergonimiques",
+    "phoenix medical",
+    "phoenix médical",
+    "produits ergonimiques",
+  ],
   description:
     "Votre confort, notre priorité. Des solutions ergonomiques sur mesure pour un bien-être durable",
   twitter: {
