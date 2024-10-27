@@ -3,9 +3,14 @@ import { ConvexHttpClient } from "convex/browser";
 import type { MetadataRoute } from "next";
 
 const fetchData = async () => {
-  const client = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
-  const products = await client.query(api.catalogue.list);
-  return products;
+  try {
+    const client = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+    const products = await client.query(api.catalogue.list);
+    return products;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return []; // Retournez un tableau vide en cas d'erreur
+  }
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -13,12 +18,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const products = await fetchData();
 
-  const SMproducts = products.map((item) => {
-    return {
-      url: `${BaseUrl}/catalogue/${item._id}`,
-      lastModified: new Date(item._creationTime),
-    };
-  });
+  const SMproducts = Array.isArray(products)
+    ? products.map((item) => {
+        return {
+          url: `${BaseUrl}/catalogue/${item._id}`,
+          lastModified: new Date(item._creationTime),
+        };
+      })
+    : [];
 
   return [
     {
