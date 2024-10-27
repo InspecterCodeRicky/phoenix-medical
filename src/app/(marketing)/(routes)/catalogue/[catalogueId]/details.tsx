@@ -53,6 +53,7 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
 
   useEffect(() => {
     if (product) {
+      window.scrollTo(0, 0);
       setLoading(true);
     }
   }, [product]);
@@ -69,13 +70,13 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
   return (
     <div>
       {!product ? (
-        <div className="grid md:grid-cols-12 gap-5 mt-3">
-          <div className="md:col-span-8 grid md:grid-cols-2 gap-5">
-            <Skeleton className="h-44 md:h-96 w-full" />
-            <Skeleton className="h-44 md:h-96 w-full" />
-            <Skeleton className="h-44 md:h-96 w-full" />
+        <div className="grid lg:grid-cols-12 gap-5 mt-3">
+          <div className="lg:col-span-8 grid lg:grid-cols-2 gap-5">
+            <Skeleton className="h-44 lg:h-96 w-full" />
+            <Skeleton className="hidden lg:block h-44 lg:h-96 w-full" />
+            <Skeleton className="hidden lg:block h-44 lg:h-96 w-full" />
           </div>
-          <div className="md:col-span-4 space-y-3">
+          <div className="lg:col-span-4 space-y-3">
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-1/2" />
             <Skeleton className="h-4 w-1/4" />
@@ -89,16 +90,16 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
             onClick={() => {
               router.back();
             }}
-            className="flex gap-2 items-center w-fit"
+            className="pl-2 md:pl-0 flex gap-2 items-center w-fit"
           >
             <ArrowLeft />
             <p>Retour</p>
           </div>
-          <div className="grid md:grid-cols-12 gap-5">
-            <ScrollArea className="md:hidden block w-full whitespace-nowrap">
+          <div className="grid lg:grid-cols-12 gap-5">
+            <ScrollArea className="lg:hidden block w-full whitespace-nowrap">
               <div className="flex w-max space-x-5">
                 {product?.images?.map((image, index) => (
-                  <div key={index} className="h-96 bg-muted">
+                  <div key={index} className="h-96 bg-muted max-w-80">
                     <Image
                       src={image.url}
                       width={800}
@@ -111,7 +112,7 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
               </div>
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
-            <div className="hidden md:col-span-8 md:grid grid-cols-2 gap-5">
+            <div className="hidden lg:col-span-8 lg:grid grid-cols-2 gap-5">
               {product?.images?.map((image, index) => (
                 <div key={index} className="h-44 md:h-96 bg-muted">
                   <Image
@@ -124,7 +125,7 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
                 </div>
               ))}
             </div>
-            <div className={`${maxWidth && "container"}  md:col-span-4`}>
+            <div className={`${maxWidth && "container"}  lg:col-span-4`}>
               <div className="flex flex-col gap-3 sticky top-28">
                 <div className="flex justify-between gap-5">
                   <p className="text-lg font-bold">{product.title}</p>
@@ -169,7 +170,9 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7">
                   {(similarProd || []).map((p, index) => {
                     if (index < 4) {
-                      return <CardProduct key={p.ref} product={p} />;
+                      return <CardProduct key={p.ref} product={p} goToDetails={()=> {
+                        router.push(`/catalogue/${p._id}`);
+                      }}/>;
                     }
                   })}
                 </div>
