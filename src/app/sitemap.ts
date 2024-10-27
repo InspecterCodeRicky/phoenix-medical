@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const SMproducts = products.map((item) => {
     return {
-      url: `${BaseUrl}/${item._id}`,
+      url: `${BaseUrl}/catalogue/${item._id}`,
       lastModified: new Date(item._creationTime),
     };
   });
