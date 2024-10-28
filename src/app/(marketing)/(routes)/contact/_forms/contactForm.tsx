@@ -76,7 +76,7 @@ const ContactForm = () => {
     })
 
     // await sendMail({
-    //   from: values.email,
+    //   to: values.email,
     //   subject: "Phoenix Médical",
     //   data: values,
     //   typeEmail: "contact",

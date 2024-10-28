@@ -6,7 +6,7 @@ import fadeIn from "@/lib/variants-motion";
 const Exosquelette = () => {
   return (
     <div className="relative mt-36 bg-muted">
-      <div className="grid md:grid-cols-2 gap-5">
+      <div className="grid md:grid-cols-2">
         <div className="container xl:px-32 py-10 xl:py-24 flex flex-col justify-center gap-5 ">
           <motion.p
             variants={fadeIn("down", 0.3)}

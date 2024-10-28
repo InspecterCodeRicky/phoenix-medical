@@ -2,18 +2,12 @@
 
 import { cn } from "@/lib/utils";
 
-import { AlignJustify, CalendarFold, Phone } from "lucide-react";
+import {CalendarFold, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 const Header = () => {
   const pathname = usePathname();
@@ -43,7 +37,6 @@ const Header = () => {
   }, []);
 
   const resetScrollPosition = () => {
-    console.log("dede");
     sessionStorage.setItem("scrollPosition", "0");
   };
 
@@ -57,7 +50,6 @@ const Header = () => {
     >
       <div className="container py-5 flex justify-between items-center">
         <div className="flex items-end gap-5">
-          {/* <MenuBurger /> */}
           <div
             role="button"
             onClick={() => {
@@ -66,10 +58,10 @@ const Header = () => {
             }}
           >
             <Image
-              className="w-full h-full object-contain"
+              className="w-full h-10 object-contain"
               src="/img/logo.png"
-              width={120}
-              height={120}
+              width={150}
+              height={40}
               alt="logo"
             />
           </div>
@@ -94,12 +86,12 @@ const Header = () => {
           ))}
         </nav>
         <div className="flex gap-5">
-          <div className="flex justify-center items-center cursor-pointer rounded-full h-6 w-6 border border-muted-foreground text-muted-foreground hover:bg-muted-foreground/10">
+          <Link href="tel:0590889758" className="flex justify-center items-center cursor-pointer rounded-full h-6 w-6 border border-muted-foreground text-muted-foreground hover:bg-muted-foreground/10">
             <Phone className="h-4 w-4" />
-          </div>
-          <div className="flex justify-center items-center cursor-pointer rounded-full h-6 w-6 border border-muted-foreground text-muted-foreground hover:bg-muted-foreground/10">
+          </Link>
+          <Link href="/contact" className="flex justify-center items-center cursor-pointer rounded-full h-6 w-6 border border-muted-foreground text-muted-foreground hover:bg-muted-foreground/10">
             <CalendarFold className="h-4 w-4" />
-          </div>
+          </Link>
         </div>
       </div>
     </div>

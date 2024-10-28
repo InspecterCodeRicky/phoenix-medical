@@ -6,6 +6,7 @@ import Hero from "@/app/(marketing)/(routes)/(home)/_strates/hero";
 import Catalogue from "@/app/(marketing)/_strates/catalogue";
 import Amenagement from "@/app/(marketing)/(routes)/(home)/_strates/amenagement";
 import FAQ from "@/app/(marketing)/(routes)/(home)/_strates/faq";
+import Lea from "./_strates/lea";
 
 function Page() {
   return (
@@ -14,6 +15,7 @@ function Page() {
         <Hero />
         <BenefitsErgo />
         <Exosquelette />
+        <Lea />
         <Catalogue DontSavedScrollPosition={true}/>
         <Amenagement />
         <FAQ />

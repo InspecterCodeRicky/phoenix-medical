@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 const fetchData = async (catalogueId: string) => {
   const client = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
   const product = await client.query(api.catalogue.getById, {
-    catalogueId: catalogueId as Id<"catalogue">
+    catalogueId: catalogueId as Id<"catalogue">,
   });
   return {
     title: product?.title,
@@ -167,12 +167,23 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
             {!!(similarProd || []).length && (
               <div className="mt-10">
                 <p className="text-3xl font-semibold">Produits similaires 😎</p>
+                <p className="text-sm md:text-base text-muted-foreground md:w-1/2 mt-3">
+                  Tous nos produits ne sont pas listés sur le site. Pour
+                  découvrir notre gamme complète et obtenir des informations
+                  détaillées, n’hésitez pas à nous contacter directement.
+                </p>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7">
                   {(similarProd || []).map((p, index) => {
                     if (index < 4) {
-                      return <CardProduct key={p.ref} product={p} goToDetails={()=> {
-                        router.push(`/catalogue/${p._id}`);
-                      }}/>;
+                      return (
+                        <CardProduct
+                          key={p.ref}
+                          product={p}
+                          goToDetails={() => {
+                            router.push(`/catalogue/${p._id}`);
+                          }}
+                        />
+                      );
                     }
                   })}
                 </div>

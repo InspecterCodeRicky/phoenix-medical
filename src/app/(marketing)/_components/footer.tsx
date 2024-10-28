@@ -90,7 +90,7 @@ const Footer = () => {
             {/* Réseaux sociaux */}
             <div className="flex flex-col gap-3 lg:items-end">
               <p className="text-white font-semibold">Réseaux sociaux</p>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 lg:items-end">
                 <Link
                   href="https://www.instagram.com/phoenix.medical.gpe?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                   target="_blank"
@@ -103,7 +103,7 @@ const Footer = () => {
                   Instagram
                 </Link>
                 <Link
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/profile.php?id=61566455577776"
                   target="_blank"
                   className={cn(
                     `relative text-sm text-white font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
@@ -112,6 +112,17 @@ const Footer = () => {
                   )}
                 >
                   Facebook
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/company/sas-phoenix-medical/?viewAsMember=true"
+                  target="_blank"
+                  className={cn(
+                    `relative text-sm text-white font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
+                      pathname == "/facebook" && "text-white after:scale-x-100"
+                    }`
+                  )}
+                >
+                  Linkedin
                 </Link>
               </div>
             </div>

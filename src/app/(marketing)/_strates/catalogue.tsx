@@ -6,11 +6,13 @@ import { MoveRight } from "lucide-react";
 import Link from "next/link";
 import ListCatalogue from "./list-catalogue";
 
-
-
-
-const Catalogue = ({ displayAll = false, DontSavedScrollPosition = false }: { displayAll?: Boolean, DontSavedScrollPosition?: Boolean }) => {
-
+const Catalogue = ({
+  displayAll = false,
+  DontSavedScrollPosition = false,
+}: {
+  displayAll?: Boolean;
+  DontSavedScrollPosition?: Boolean;
+}) => {
   return (
     <div className="container mt-36">
       <motion.div
@@ -37,12 +39,23 @@ const Catalogue = ({ displayAll = false, DontSavedScrollPosition = false }: { di
           </p>
         )}
 
-        <p className="text-sm md:text-base text-center text-muted-foreground md:w-1/2">
-          L’ergonomie au travail favorise une meilleure posture et réduit les
-          risques de blessures, contribuant ainsi à une vie professionnelle
-        </p>
+        {!displayAll ? (
+          <p className="text-sm md:text-base text-center text-muted-foreground md:w-1/2">
+            L’ergonomie au travail favorise une meilleure posture et réduit les
+            risques de blessures, contribuant ainsi à une vie professionnelle
+          </p>
+        ) : (
+          <p className="text-sm md:text-base text-center text-muted-foreground md:w-1/2">
+            "Tous nos produits ne sont pas listés sur le site. Pour découvrir
+            notre gamme complète et obtenir des informations détaillées,
+            n’hésitez pas à nous contacter directement."
+          </p>
+        )}
       </motion.div>
-      <ListCatalogue displayAll={displayAll} DontSavedScrollPosition={DontSavedScrollPosition} />
+      <ListCatalogue
+        displayAll={displayAll}
+        DontSavedScrollPosition={DontSavedScrollPosition}
+      />
     </div>
   );
 };

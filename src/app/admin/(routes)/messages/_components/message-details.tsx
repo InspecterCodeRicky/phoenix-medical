@@ -133,20 +133,16 @@ const MessageDetails = ({ messageId }: { messageId: string }) => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={MessageStatus.Replied}>
-                {" "}
-                {MessageStatus.Replied}{" "}
+                {MessageStatus.Replied}
               </SelectItem>
               <SelectItem value={MessageStatus.InProgress}>
-                {" "}
-                {MessageStatus.InProgress}{" "}
+                {MessageStatus.InProgress}
               </SelectItem>
               <SelectItem value={MessageStatus.Closed}>
-                {" "}
-                {MessageStatus.Closed}{" "}
+                {MessageStatus.Closed}
               </SelectItem>
               <SelectItem value={MessageStatus.Rejected}>
-                {" "}
-                {MessageStatus.Rejected}{" "}
+                {MessageStatus.Rejected}
               </SelectItem>
             </SelectContent>
           </Select>
@@ -179,37 +175,41 @@ const MessageDetails = ({ messageId }: { messageId: string }) => {
             ))}
           </div>
         </div>
-        <Separator />
-        <div className="p-4 absolute bottom-12 left-0 right-0 bg-white">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleReplyTo)}>
-              <div className="grid gap-4">
-                {/* <ScrollArea className="max-h-52"> */}
-                <FormField
-                  control={form.control}
-                  name="body"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Textarea
-                          placeholder={`Répondre à ${document?.message.name}...`}
-                          className="resize-none"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                {/* </ScrollArea> */}
-                <div className="flex items-center">
-                  <Button type="submit" size="sm" className="ml-auto">
-                    Send
-                  </Button>
+
+        <div className="absolute bottom-12 left-0 right-0 bg-white">
+          <Separator />
+
+          <div className="p-4 ">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleReplyTo)}>
+                <div className="grid gap-4">
+                  {/* <ScrollArea className="max-h-52"> */}
+                  <FormField
+                    control={form.control}
+                    name="body"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Textarea
+                            placeholder={`Répondre à ${document?.message.name}...`}
+                            className="resize-none"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {/* </ScrollArea> */}
+                  <div className="flex items-center">
+                    <Button type="submit" size="sm" className="ml-auto">
+                      Send
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </form>
-          </Form>
+              </form>
+            </Form>
+          </div>
         </div>
       </ScrollArea>
     </div>

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "produits ergonimiques",
   ],
   description:
-    "Votre confort, notre priorité. Des solutions ergonomiques sur mesure pour un bien-être durable",
+    "Votre confort, notre priorité. Des solutions ergonomiques sur mesure pour un bien-être durable. Que ce soit pour le bureau ou pour les tâches physiques, vous trouverez des solutions innovantes au service de votre santé",
   twitter: {
     card: "summary_large_image",
   },
