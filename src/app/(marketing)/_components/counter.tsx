@@ -25,15 +25,16 @@ const CounterText = ({
       suffix={suffix}
     >
       {({ countUpRef }) => (
-        // <VisibilitySensor
-        //   onChange={(isVisible: boolean) => {
-        //     if (isVisible) {
-        //       setFocus(true);
-        //     }
-        //   }}
-        // >
-        // </VisibilitySensor>
-        <span ref={countUpRef} className="uppercase text-3xl font-thin" />
+        <VisibilitySensor
+          onChange={(isVisible: boolean) => {
+            if (isVisible) {
+              setFocus(true);
+            }
+          }}
+        >
+          <span ref={countUpRef} className="uppercase text-3xl font-thin" />
+        </VisibilitySensor>
+        // <span ref={countUpRef} className="uppercase text-3xl font-thin" />
       )}
     </CountUp>
   );
