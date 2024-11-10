@@ -69,10 +69,10 @@ const Footer = () => {
                   Contact
                 </Link>
                 <Link
-                  href="/prise-rdv"
+                  href="/contact"
                   className={cn(
                     `relative text-sm text-white font-medium hover:text-white w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center ${
-                      pathname == "/prise-rdv" && "text-white after:scale-x-100"
+                      pathname == "/contact" && "text-white after:scale-x-100"
                     }`
                   )}
                 >

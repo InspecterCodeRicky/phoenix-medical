@@ -1,7 +1,8 @@
 import { mutation, query } from "./_generated/server";
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 
 import { filter } from "convex-helpers/server/filter";
+import { Doc, Id } from "./_generated/dataModel";
 
 export const list = query({
   handler: async (ctx) => {
@@ -57,20 +58,69 @@ export const update = mutation({
     if (catalogue == null) {
       throw new Error("Not found");
     }
-    await ctx.db.patch(args.catalogueId, { ...args });
+    await ctx.db.patch(args.catalogueId, { 
+      ref : args.ref,
+      title : args.title,
+      carateristics : args.carateristics,
+      shortDescription : args.shortDescription,
+      description : args.description,
+      images : args.images,
+      price : args.price,
+      ugc : args.ugc,
+      status : args.status,
+      tags : args.tags,
+     });
 
     return catalogue;
   },
 });
 
+// export const getById = query({
+//   args: { catalogueId: v.id("catalogue") },
+//   handler: async (ctx, args) => {
+//     try {
+//       const catalogue = await ctx.db.get(args.catalogueId);
+//       return catalogue;
+//     } catch (error) {
+//       return null
+//     }
+//   },
+// });
+
 export const getById = query({
-  args: { catalogueId: v.id("catalogue") },
+  args: { catalogueId: v.string() },
   handler: async (ctx, args) => {
     try {
-      const catalogue = await ctx.db.get(args.catalogueId);
-      return catalogue;
-    } catch (error) {}
-    return null;
+      // Vérifie le format de l'ID avec une expression régulière
+      const isValidId = /^[a-z0-9]{32}$/i.test(args.catalogueId);
+
+      if (!isValidId) {
+        console.warn(`Invalid catalogue ID format: ${args.catalogueId}`);
+        return null;
+      }
+
+      const id = args.catalogueId as Id<"catalogue">;
+      const catalogue = await ctx.db.get(id);
+
+      if (!catalogue) {
+        console.warn(`Catalogue not found for ID: ${args.catalogueId}`);
+        return null;
+      }
+      const tags = catalogue?.tags;
+      const cataloguesSimilars = filter(
+        ctx.db.query("catalogue"),
+        (q) =>
+          q._id != args.catalogueId && q.tags.some((tag) => tags?.includes(tag))
+      ).take(4);
+
+      return {
+        ...catalogue,
+        similarProd: [...(await cataloguesSimilars).map((el) => el)],
+      };
+    } catch (error) {
+      console.error("Error fetching catalogue by ID:", error);
+     return null
+    }
   },
 });
 

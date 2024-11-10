@@ -13,7 +13,7 @@ const FAQ = () => {
     {
       question: "Quels sont les délais de livraison ?",
       answer:
-        "Nos délais de livraison varient selon le produit et la personnalisation. En général, comptez entre 2 à 4 semaines pour les équipements sur mesure.",
+        "Nos délais de livraison varient selon le produit et la personnalisation. En général, comptez entre 4 à 7 semaines pour les équipements sur mesure.",
     },
     {
       question: "Proposez-vous des essais avant l'achat ?",
@@ -28,7 +28,7 @@ const FAQ = () => {
     {
       question: "Quels modes de paiement acceptez-vous ?",
       answer:
-        "Nous acceptons les paiements par carte bancaire, virement, et PayPal pour plus de flexibilité.",
+        "Nous acceptons les paiements par carte bancaire, virement pour plus de flexibilité.",
     },
   ];
 

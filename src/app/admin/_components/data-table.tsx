@@ -13,9 +13,10 @@ import { useMemo, useState } from "react";
 import "@/lib/surchagePrototypes";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 // import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-
 
 interface DataTableProps {
   data: any[];
@@ -25,6 +26,7 @@ interface DataTableProps {
   itemsPerPage?: number;
   itemsPerButton?: number;
   canSearch?: boolean;
+  CallbackLine?: (line: any) => void;
 }
 
 interface DetailedPropertiesProps {
@@ -98,6 +100,13 @@ const DataTable = (props: DataTableProps) => {
     return filteringData.slice(start, end);
   }, [currentPage, filteringData, changeEntriesPerPage, searchItem]);
 
+  const getColorBadge = (status: string) => {
+    return { published: "bg-green-500" }[status];
+  };
+
+  const getTextBadge = (status: string) => {
+    return { published: "Publié" }[status];
+  };
 
   return (
     <div className="flex flex-col gap-3">
@@ -107,7 +116,7 @@ const DataTable = (props: DataTableProps) => {
             placeholder="Rechercher..."
             value={searchItem}
             onChange={(event) => setSearchItem(event.target.value)}
-            className="h-8 w-[150px] lg:w-[250px] ml-2"
+            className="h-8 w-[150px] lg:w-[250px]"
           />
         )}
       </div>
@@ -122,10 +131,25 @@ const DataTable = (props: DataTableProps) => {
           </TableHeader>
           <TableBody>
             {displayedData.map((line: any, position) => (
-              <TableRow key={`line-${position}`}>
+              <TableRow
+                key={`line-${position}`}
+                className={cn(
+                  typeof props.CallbackLine == "function" && "cursor-pointer"
+                )}
+                onClick={() => {
+                  if(typeof props.CallbackLine == "function"){
+                    props.CallbackLine(line)
+                  }
+                }}
+              >
                 {props.detailedProperties.map((col, index) => (
                   <TableCell key={`col-${index}`}>
                     {col.type == "text" && <p>{line[col.name]}</p>}
+                    {col.type == "status" && (
+                      <Badge className={getColorBadge(line[col.name])}>
+                        {getTextBadge(line[col.name])}
+                      </Badge>
+                    )}
                     {col.type == "image" && (
                       <Image
                         src={line[col.name]}

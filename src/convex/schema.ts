@@ -39,4 +39,8 @@ export default defineSchema({
     tags: v.array(v.string()),
     status: v.string(),
   }).index("by_user", ["ref"]),
+  mentionsLegales: defineTable({
+    title: v.string(),
+    text: v.string(),
+  }),
 });

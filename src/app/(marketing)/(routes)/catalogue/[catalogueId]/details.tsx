@@ -18,6 +18,8 @@ import { Metadata } from "next";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ConvexHttpClient } from "convex/browser";
 
+const isValidCatalogueId = (id: string) => /^[a-z0-9]{32}$/i.test(id);
+
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   let product = await fetchData(params.catalogueId);
   return {
@@ -30,37 +32,48 @@ const fetchData = async (catalogueId: string) => {
   const client = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
   const product = await client.query(api.catalogue.getById, {
     catalogueId: catalogueId as Id<"catalogue">,
-  });
+  })
   return {
-    title: product?.title,
-    shortDescription: product?.shortDescription,
+    title: product!.title,
+    shortDescription: product!.shortDescription,
   };
 };
 
 const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
   const maxWidth = useMediaQuery("(max-width: 768px)");
   const [loading, setLoading] = useState(true);
-  // const [product, setProduct] = useState<Doc<"catalogue">>();
-  // const [similarProd, setSimilarProd] = useState<Doc<"catalogue">[]>([]);
 
   const router = useRouter();
 
-  const product = useQuery(api.catalogue.getById, { catalogueId });
+  // if (!isValidCatalogueId(catalogueId)) {
+  //   notFound();
+  // }
 
-  const similarProd = useQuery(api.catalogue.getSimilarProdByTags, {
-    catalogueId,
-  });
+  const product = useQuery(api.catalogue.getById, { catalogueId });
+  
 
   useEffect(() => {
-    if (product) {
-      window.scrollTo(0, 0);
-      setLoading(true);
+    if (product === undefined) {
+      setLoading(true); // En cours de chargement
+    } else {
+      setLoading(false); // Chargement terminé
+      if (product === null) {
+        notFound(); // Produit introuvable, redirection vers 404
+      }
     }
   }, [product]);
 
-  if (!loading && !product) {
-    notFound();
-  }
+  // if (!loading && product == null) {
+  //   notFound();
+  // }
+  // let similarProd : Doc<"catalogue">[] = []
+
+  // if(product && product._id) {
+  //   similarProd = useQuery(api.catalogue.getSimilarProdByTags, {
+  //     catalogueId,
+  //   })!;
+  // }
+
 
   const [favorite, setFavorite] = useState(false);
 
@@ -104,7 +117,7 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
                       src={image.url}
                       width={800}
                       height={800}
-                      alt={product.title}
+                      alt={product!.title}
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -119,7 +132,7 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
                     src={image.url}
                     width={800}
                     height={800}
-                    alt={product.title}
+                    alt={product!.title}
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -164,7 +177,7 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
                 dangerouslySetInnerHTML={{ __html: product.carateristics! }}
               />
             </div>
-            {!!(similarProd || []).length && (
+            {!!(product?.similarProd || []).length && (
               <div className="mt-10">
                 <p className="text-3xl font-semibold">Produits similaires 😎</p>
                 <p className="text-sm md:text-base text-muted-foreground md:w-1/2 mt-3">
@@ -173,7 +186,7 @@ const DetailsProduct = ({ catalogueId }: { catalogueId: Id<"catalogue"> }) => {
                   détaillées, n’hésitez pas à nous contacter directement.
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7">
-                  {(similarProd || []).map((p, index) => {
+                  {(product?.similarProd || []).map((p, index) => {
                     if (index < 4) {
                       return (
                         <CardProduct

@@ -2,19 +2,21 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 type Store = {
-  isCollapsed: boolean;
-  layoutAdmin: number[];
-  setIsCollapsed: (state: boolean) => void;
-  setLayoutAdmin: (layout: number[]) => void;
+  breadcrumbItems: MenuItemBreadcrumbItems[];
+  setIsBreadcrumbItems: (state: MenuItemBreadcrumbItems[]) => void;
 };
+
+export interface MenuItemBreadcrumbItems {
+  title: string;
+  url: string;
+}
 
 export const useAppStore = create<Store>()(
   persist(
     (set) => ({
-      isCollapsed: true,
+      breadcrumbItems: [],
       layoutAdmin: [20, 80],
-      setIsCollapsed: (state: boolean) => set({ isCollapsed: state }),
-      setLayoutAdmin: (layout: number[]) => set({ layoutAdmin: layout }),
+      setIsBreadcrumbItems: (breadcrumbItems: MenuItemBreadcrumbItems[]) => set({ breadcrumbItems: breadcrumbItems }),
     }),
     {
       name: "app-store",

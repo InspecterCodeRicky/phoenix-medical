@@ -4,9 +4,7 @@ import Listing from "./_components/listing";
 
 const CataloguePage = () => {
     return ( 
-        <>
         <Listing/>
-        </>
      );
 }
  

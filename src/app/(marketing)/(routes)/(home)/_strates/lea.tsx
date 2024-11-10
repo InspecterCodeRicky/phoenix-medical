@@ -83,12 +83,14 @@ const Lea = () => {
             className="flex flex-col gap-5"
           >
             <p>
-              Léa est un outil d'analyse posturale au service de la santé au
-              travail. Léa identifie automatiquement les articulations et
-              compare les angles avec le standard ergonomique RULA. Léa est là
-              pour vous simplifier la vie en objectivant vos analyses. Nous
-              espérons que Léa vous sera utile comme elle l'est pour nos
-              équipes.
+              L'outil d'analyse posturale LEA est conçu pour évaluer et analyser
+              la posture des individus. Il permet de détecter les déséquilibres
+              et d'identifier les zones de tension ou de douleur. Grâce à des
+              mesures précises et des observations détaillées, LEA aide à mieux
+              comprendre la posture et à proposer des solutions adaptées, que ce
+              soit par des exercices, des ajustements ergonomiques ou d'autres
+              interventions. Si vous avez des questions spécifiques sur son
+              utilisation ou ses bénéfices, n'hésitez pas à demander !
             </p>
             <div className="flex gap-5 items-center mt-5">
               <Button variant="outline" className="md:w-fit w-full">

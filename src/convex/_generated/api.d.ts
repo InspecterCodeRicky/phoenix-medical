@@ -15,6 +15,7 @@ import type {
 } from "convex/server";
 import type * as catalogue from "../catalogue.js";
 import type * as devis from "../devis.js";
+import type * as mentionsLegales from "../mentionsLegales.js";
 import type * as messages from "../messages.js";
 
 /**
@@ -28,6 +29,7 @@ import type * as messages from "../messages.js";
 declare const fullApi: ApiFromModules<{
   catalogue: typeof catalogue;
   devis: typeof devis;
+  mentionsLegales: typeof mentionsLegales;
   messages: typeof messages;
 }>;
 export declare const api: FilterApi<
