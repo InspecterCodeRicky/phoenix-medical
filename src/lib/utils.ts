@@ -17,3 +17,5 @@ export {
   getColorBadge,
   cn
 }
+
+// @hello-pangea/dnd

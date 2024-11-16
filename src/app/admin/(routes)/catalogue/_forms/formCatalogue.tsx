@@ -43,11 +43,13 @@ const formSchema = z.object({
   ref: z
     .string({ message: "Ce champs est requis" })
     .min(2, { message: "Doit avoir au moins 2 caractères" }),
-  images: z.array(
-    z.object({
-      url: z.string(),
-    })
-  ),
+  images: z
+    .array(
+      z.object({
+        url: z.string(),
+      })
+    )
+    .min(1, {message : "Téléversez au moins une image"}),
   title: z
     .string({ message: "Ce champs est requis" })
     .min(2, { message: "Doit avoir au moins 2 caractères" }),
@@ -107,11 +109,13 @@ const FormCatalogue = ({
   useEffect(() => {
     setOpenSheet(isModal);
     form.reset({
-      ...catalogue,
+      ...catalogue
     });
+    console.log("form", form.control.getFieldState("images"))
   }, [catalogue, form, isModal]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log("onSubmit")
     if (isLoaded) return;
     setiIsLoaded(true);
     if (catalogue?._id) {
@@ -150,6 +154,19 @@ const FormCatalogue = ({
           </p>
           <ScrollArea className="min-h-0 h-full flex-1">
             <div className="space-y-4 m-4">
+              <FormField
+                control={form.control}
+                name="images"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Images {field.value.length} </FormLabel>
+                    <FormControl>
+                      {/* <Input type="text" placeholder="Référence" {...field} /> */}
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="ref"
@@ -305,7 +322,10 @@ const FormCatalogue = ({
     <>
       {isModal ? (
         <Sheet open={openSheet} onOpenChange={handleOpenChange}>
-          <SheetContent className="flex flex-col p-0" onOpenAutoFocus={(e) => e.preventDefault()}>
+          <SheetContent
+            className="flex flex-col p-0"
+            onOpenAutoFocus={(e) => e.preventDefault()}
+          >
             <SheetHeader className="hidden h-0">
               <SheetTitle>#{catalogue?.ref}</SheetTitle>
             </SheetHeader>

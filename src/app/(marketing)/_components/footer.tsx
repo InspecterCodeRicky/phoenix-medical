@@ -16,7 +16,8 @@ const Footer = () => {
 
   return (
     <div className="md:container mt-36 md:mb-5">
-      <div className="bg-[#0E0E0E] md:rounded-xl">
+      <div className="bg-primary md:rounded-xl">
+      {/* <div className="bg-[#0E0E0E] md:rounded-xl"> */}
         <div className="container py-10">
           <div className="max-w-48">
             <Image

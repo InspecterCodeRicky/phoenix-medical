@@ -20,7 +20,6 @@ const ReactQuillField = ({
     <ReactQuill
       value={value}
       onChange={(value)=> {
-        console.log("value")
         onChange(value)
       }}
       theme="snow"

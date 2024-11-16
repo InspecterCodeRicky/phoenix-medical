@@ -32,7 +32,7 @@ const BenefitsErgo = () => {
             viewport={{ once: true, amount: 0.7 }}
             className="flex flex-col justify-center"
           >
-            <p className="text-3xl font-medium md:w-4/5">
+            <p className="text-primary text-3xl font-medium md:w-4/5">
               🤩 Les bienfaits de l’ergonomie sur la santé
             </p>
             <p className="text-muted-foreground mt-5">

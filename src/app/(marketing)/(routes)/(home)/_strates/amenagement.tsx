@@ -17,7 +17,7 @@ const Amenagement = () => {
             viewport={{ once: true, amount: 0.7 }}
             className="flex flex-col justify-center"
           >
-            <p className="text-3xl font-medium xs:w-4/5">
+            <p className="text-primary text-3xl font-medium xs:w-4/5">
               😍 Aménager votre espace de travail 
             </p>
             <p className="text-muted-foreground mt-5">

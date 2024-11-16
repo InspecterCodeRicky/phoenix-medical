@@ -28,13 +28,13 @@ const Catalogue = ({
             href="/catalogue"
             className="group flex items-center gap-4"
           >
-            <p className="text-3xl font-semibold relative  w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:scale-x-50 after:h-[3px] after:bg-primary after:w-full after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">
+            <p className="text-primary text-3xl font-semibold relative  w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:scale-x-50 after:h-[3px] after:bg-primary after:w-full after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">
               Nos Produits 😎
             </p>
             <MoveRight className="transition-all duration-300 opacity-0 group-hover:opacity-100" />
           </Link>
         ) : (
-          <p className="text-3xl font-semibold relative  w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:scale-x-50 after:h-[3px] after:bg-primary after:w-full after:transition after:duration-300 after:origin-center">
+          <p className="text-primary text-3xl font-semibold relative  w-fit transition-all block after:block after:content-[''] after:rounded-full after:absolute after:scale-x-50 after:h-[3px] after:bg-primary after:w-full after:transition after:duration-300 after:origin-center">
             Nos Produits 😎
           </p>
         )}

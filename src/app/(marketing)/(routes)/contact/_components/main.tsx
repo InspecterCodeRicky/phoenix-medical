@@ -104,7 +104,7 @@ const MainContact = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.7 }}
-            className="uppercase text-3xl font-bold text-center"
+            className="uppercase text-primary text-3xl font-bold text-center"
           >
             📤 Prendre contact avec nous
           </motion.h1>

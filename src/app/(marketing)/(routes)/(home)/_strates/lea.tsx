@@ -71,7 +71,7 @@ const Lea = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="text-3xl font-medium"
+            className="text-primary text-3xl font-medium"
           >
             Application Léa
           </motion.p>

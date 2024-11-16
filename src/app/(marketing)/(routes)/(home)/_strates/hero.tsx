@@ -18,7 +18,7 @@ const Hero = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.7 }}
-              className="uppercase text-3xl font-bold md:w-2/3"
+              className="uppercase text-primary text-3xl font-bold md:w-2/3"
             >
               Nos solutions ergonomiques
             </motion.h1>

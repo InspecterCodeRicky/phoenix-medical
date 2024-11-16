@@ -30,7 +30,6 @@ const Listing = () => {
   }
 
   const handleSelectLine = (line?: any) => {
-    console.log("dede");
     if (line) {
       setCatalogue(line);
     } else {

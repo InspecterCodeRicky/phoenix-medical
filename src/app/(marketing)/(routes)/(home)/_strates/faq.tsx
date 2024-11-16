@@ -39,7 +39,7 @@ const FAQ = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.7 }}
-        className="text-5xl font-semibold md:text-center mb-2"
+        className="text-primary text-5xl font-semibold md:text-center mb-2"
       >
         FAQ ?
       </motion.h2>

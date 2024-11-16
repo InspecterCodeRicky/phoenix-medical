@@ -29,8 +29,8 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { MenuItemBreadcrumbItems, useAppStore } from "@/store/app.store";
-import { useEffect, useMemo } from "react";
+import { useAppStore } from "@/store/app.store";
+import { useCallback, useEffect, useMemo } from "react";
 
 const BASE_URL_ADMIN = process.env.NEXT_PUBLIC_APP_PATH_ADMIN!;
 
@@ -81,7 +81,22 @@ export function AppSidebar() {
   const setBreadcrumbItems = useAppStore((state) => state.setIsBreadcrumbItems);
   const breadcrumbItems = useAppStore((state) => state.breadcrumbItems);
 
-  const findItemByUrl = (itemsList :  any[], url : string) : any | null => {
+  // const findItemByUrl = (itemsList :  any[], url : string) : any | null => {
+  //   for (const item of itemsList) {
+  //     if (item.url === url) {
+  //       return item;
+  //     }
+  //     if (item.children) {
+  //       const foundChild = findItemByUrl(item.children, url);
+  //       if (foundChild) {
+  //         return foundChild;
+  //       }
+  //     }
+  //   }
+  //   return null;
+  // };
+
+  const findItemByUrl = useCallback((itemsList: any[], url: string): any | null => {
     for (const item of itemsList) {
       if (item.url === url) {
         return item;
@@ -94,7 +109,7 @@ export function AppSidebar() {
       }
     }
     return null;
-  };
+  }, []);
 
   useEffect(() => {
     const cleanPathname = pathname.replace(
@@ -110,7 +125,7 @@ export function AppSidebar() {
     } else {
       setBreadcrumbItems([]);
     }
-  }, [pathname, setBreadcrumbItems]);
+  }, [pathname, setBreadcrumbItems, findItemByUrl]);
 
   return (
     <Sidebar>
