@@ -52,7 +52,7 @@ const CardProduct = ({
           />
         </div>
         <div>
-          <p className="text-sm md:text-lg font-bold truncate">
+          <p className="text-sm md:text-lg text-primary font-bold truncate">
             {product.title}
           </p>
           {product.shortDescription && (

@@ -7,6 +7,7 @@ import { Doc, Id } from "./_generated/dataModel";
 export const list = query({
   handler: async (ctx) => {
     const list = ctx.db.query("catalogue").collect();
+   
     return list;
   },
 });
