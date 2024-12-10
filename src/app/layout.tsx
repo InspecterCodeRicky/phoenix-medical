@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://phoenixmedical.fr"),
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <ConvexClientProvider>{children}</ConvexClientProvider>
         <Toaster />
+        <SpeedInsights />
       </body>
     </html>
   );
