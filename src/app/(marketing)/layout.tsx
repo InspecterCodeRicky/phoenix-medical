@@ -15,9 +15,8 @@ const MainLayout = ({
       {children}
 
       <MenuMobile />
-      <ConfidentialityNotice />
       <Footer />
-     
+      <ConfidentialityNotice />
     </div>
   );
 };
