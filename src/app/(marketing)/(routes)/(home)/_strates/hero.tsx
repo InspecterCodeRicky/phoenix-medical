@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import CounterText from "../../../_components/counter";
 
-import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants-motion";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
@@ -44,7 +44,7 @@ const Hero = () => {
               <Button className="md:w-fit w-full" asChild>
                 <Link href="/devis">Demandez un devis</Link>
               </Button>
-             
+
               <Button className="md:w-fit w-full" variant="outline">
                 <Link
                   href="/catalogue"
@@ -64,11 +64,15 @@ const Hero = () => {
             >
               <div>
                 <CounterText start={0} end={50} prefix="+" height={40} />
-                <p className="text-muted-foreground tracking-[.2rem]">Produits</p>
+                <p className="text-muted-foreground tracking-[.2rem]">
+                  Produits
+                </p>
               </div>
               <div>
                 <CounterText start={0} end={100} suffix="%" height={40} />
-                <p className="text-muted-foreground tracking-[.2rem]">Personnalisable</p>
+                <p className="text-muted-foreground tracking-[.2rem]">
+                  Personnalisable
+                </p>
               </div>
             </motion.div>
           </div>

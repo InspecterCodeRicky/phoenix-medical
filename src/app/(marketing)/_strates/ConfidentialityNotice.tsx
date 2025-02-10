@@ -1,7 +1,8 @@
 "use client";
-import { useClient } from "@/hooks/useClient";
 
+import { useClient } from "@/hooks/useClient";
 import { CookieModal } from "@schlomoh/react-cookieConsent";
+
 
 function ConfidentialityNotice() {
   const isClient = useClient();
