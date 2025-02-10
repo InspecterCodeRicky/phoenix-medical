@@ -1,40 +1,42 @@
 "use client";
 
 import { useClient } from "@/hooks/useClient";
-// import { CookieModal } from "@schlomoh/react-cookieConsent";
-
+import { CookieModal } from "@schlomoh/react-cookieConsent";
 
 function ConfidentialityNotice() {
   const isClient = useClient();
 
   return (
     <>
-    {/* {isClient && <CookieModal
-      infoContent={
-        <div className="space-y-2">
-          <p className="text-sm font-semibold">
-            PARAMÈTRES DE CONFIDENTIALITÉ DE PHOENIX MÉDICAL
-          </p>
-          <p className="text-xs">
-            Pour offrir les meilleures expériences, nous utilisons des
-            technologies telles que les cookies pour stocker et/ou accéder aux
-            informations des appareils. Le fait de consentir à ces technologies
-            nous permettra de traiter des données telles que le comportement de
-            navigation ou les ID uniques sur ce site. Le fait de ne pas
-            consentir ou de retirer son consentement peut avoir un effet négatif
-            sur certaines caractéristiques et fonctions.
-          </p>
-        </div>
-      }
-      acceptButtonText="Accepter"
-      declineButtonText="Refuser"
-      accentColor="#232E5A"
-      secondaryButtonStyle={{
-        background: "none",
-        border: "1px solid grey",
-        color: "grey"
-      }}
-    />} */}
+      {isClient && (
+        <CookieModal
+          infoContent={
+            <div className="space-y-2">
+              <p className="text-sm font-semibold">
+                PARAMÈTRES DE CONFIDENTIALITÉ DE PHOENIX MÉDICAL
+              </p>
+              <p className="text-xs">
+                Pour offrir les meilleures expériences, nous utilisons des
+                technologies telles que les cookies pour stocker et/ou accéder
+                aux informations des appareils. Le fait de consentir à ces
+                technologies nous permettra de traiter des données telles que le
+                comportement de navigation ou les ID uniques sur ce site. Le
+                fait de ne pas consentir ou de retirer son consentement peut
+                avoir un effet négatif sur certaines caractéristiques et
+                fonctions.
+              </p>
+            </div>
+          }
+          acceptButtonText="Accepter"
+          declineButtonText="Refuser"
+          accentColor="#232E5A"
+          secondaryButtonStyle={{
+            background: "none",
+            border: "1px solid grey",
+            color: "grey",
+          }}
+        />
+      )}
     </>
   );
 }
@@ -58,7 +60,7 @@ export default ConfidentialityNotice;
 // const ConfidentialityNotice = () => {
 //   const [open, setOpen] = useState(false);
 
-  // const isClient = useClient();
+// const isClient = useClient();
 
 //   const { confidentialityNotice, setConfidentialityNotice } = useAppStore();
 
@@ -107,4 +109,3 @@ export default ConfidentialityNotice;
 // };
 
 // export default ConfidentialityNotice;
-
