@@ -1,7 +1,7 @@
 "use client";
 
 import { useClient } from "@/hooks/useClient";
-import { CookieModal } from "@schlomoh/react-cookieConsent";
+// import { CookieModal } from "@schlomoh/react-cookieConsent";
 
 
 function ConfidentialityNotice() {
@@ -9,7 +9,7 @@ function ConfidentialityNotice() {
 
   return (
     <>
-    {isClient && <CookieModal
+    {/* {isClient && <CookieModal
       infoContent={
         <div className="space-y-2">
           <p className="text-sm font-semibold">
@@ -34,7 +34,7 @@ function ConfidentialityNotice() {
         border: "1px solid grey",
         color: "grey"
       }}
-    />}
+    />} */}
     </>
   );
 }
