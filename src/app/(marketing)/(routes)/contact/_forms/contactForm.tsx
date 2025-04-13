@@ -75,10 +75,9 @@ const ContactForm = () => {
       HandleChangeModal(true);
     })
     
-    const { EMAIL_SEND_REQUEST } = process.env;
 
     await sendMail({
-      to: EMAIL_SEND_REQUEST!,
+      to: "",
       subject: "Demande de contact",
       data: values,
       typeEmail: "contact",

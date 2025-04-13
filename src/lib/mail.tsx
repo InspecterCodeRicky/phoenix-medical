@@ -9,9 +9,6 @@ import EmailContact, {
   ContactRequestEmail,
 } from "@/app/(marketing)/_components/EmailContact";
 
-const { MailtrapTransport } = require("mailtrap");
-
-const TOKEN = "74a753a96283d807cd077307cc19e289";
 
 export async function sendMail({
   to,
@@ -27,7 +24,7 @@ export async function sendMail({
   // let emailHtml = "";
   const emailHtml = await createEmailHtml(typeEmail, data);
 
-  const { SMTP_EMAIL, SMTP_PASSWORD , SMTP_HOST} = process.env;
+  const { SMTP_EMAIL, SMTP_PASSWORD , SMTP_HOST, EMAIL_SEND_REQUEST} = process.env;
 
   const transport = nodemailer.createTransport({
     host: SMTP_HOST,
@@ -48,13 +45,14 @@ export async function sendMail({
   }
 
   try {
-    const sendResult = await transport.sendMail({
+    const payload = {
       from: '"Ideal Conception" <service@ideal-conception.fr>',
-      to,
+      to : EMAIL_SEND_REQUEST,
       subject,
       html: emailHtml,
-    });
-    console.log(sendResult, emailHtml);
+    }
+    const sendResult = await transport.sendMail(payload);
+    console.log(payload, sendResult);
   } catch (error) {
     console.log(error);
   }

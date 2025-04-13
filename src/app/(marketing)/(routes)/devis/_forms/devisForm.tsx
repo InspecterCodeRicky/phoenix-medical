@@ -66,10 +66,9 @@ const DevisForm = () => {
     await sendRequest({...values, status : MessageStatus.New}).then(() => {
       HandleChangeModal(true);
     });
-    const { EMAIL_SEND_REQUEST } = process.env;
 
     await sendMail({
-      to: EMAIL_SEND_REQUEST!,
+      to: "",
       subject: "Demande de devis",
       data: values,
       typeEmail: "devis",
