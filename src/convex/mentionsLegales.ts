@@ -17,6 +17,7 @@ export const update = mutation({
   },
   handler: async (ctx, args) => {
     const data = await ctx.db.get(args.mentionsId);
+    
     if (data == null) {
       throw new Error("Not found");
     }

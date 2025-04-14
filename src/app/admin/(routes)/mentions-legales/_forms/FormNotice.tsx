@@ -1,5 +1,7 @@
 "use client";
 
+import { debounce } from "lodash";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -61,7 +63,7 @@ const FormNotice = ({
   callback?: () => void;
 }) => {
   const [openSheet, setOpenSheet] = useState(false);
-  const [isLoaded, setiIsLoaded] = useState(false);
+  const [loading, setLoding] = useState(false);
 
   const update = useMutation(api.mentionsLegales.update);
 
@@ -77,6 +79,22 @@ const FormNotice = ({
     []
   );
 
+  // Débounce l'appel pour éviter les déclenchements trop fréquents
+  const debouncedOnChange = useMemo(
+    () =>
+      debounce((value: string) => {
+        if (value !== form.getValues("text")) {
+          form.setValue("text", value);
+        }
+      }, 300),
+    [form]
+  );
+
+  // Nettoyer le debounce à la destruction
+  useEffect(() => {
+    return () => debouncedOnChange.cancel();
+  }, [debouncedOnChange]);
+
   useEffect(() => {
     setOpenSheet(isModal);
     form.reset({
@@ -85,31 +103,28 @@ const FormNotice = ({
   }, [notice, form, isModal]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (isLoaded) return;
-    setiIsLoaded(true);
+    if (loading) return;
+    setLoding(true);
     if (notice?._id) {
       await update({
         mentionsId: notice!._id,
         ...values,
       }).then((res) => {
         if (typeof callback == "function") {
-          console.log("function");
           callback();
         }
         form.reset();
       });
     }
-    setiIsLoaded(false);
+    setLoding(false);
   };
 
   const handleOpenChange = (open: boolean) => {
     setOpenSheet(open);
     if (typeof callback == "function") {
-      console.log("function");
       callback();
     }
   };
- 
 
   const FormComponent = () => {
     return (
@@ -147,12 +162,8 @@ const FormNotice = ({
                     <FormLabel>Mention</FormLabel>
                     <FormControl>
                       <DynamicQuill
-                        value={field.value || ""}
-                        onChange={(value)=> {
-                          if(isLoaded){
-                            field.onChange(value)
-                          }
-                        }}
+                        value={field.value!}
+                        onChange={debouncedOnChange}
                         placeholder="Mention"
                       />
                     </FormControl>
@@ -166,7 +177,7 @@ const FormNotice = ({
 
           <div className="absolute bottom-0 right-0 left-0 p-2 bg-white rounded-b-lg">
             <Button type="submit" className="w-full focus-visible:ring-0">
-              {isLoaded ? <Spinner size="lg" color="white" /> : "Enregistrer"}
+              {loading ? <Spinner size="lg" color="white" /> : "Enregistrer"}
             </Button>
           </div>
         </form>

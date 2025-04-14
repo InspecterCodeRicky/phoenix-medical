@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 
 interface IReactQuill {
   value: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   className?: string;
   placeholder?: string;
 }
@@ -20,7 +20,7 @@ const ReactQuillField = ({
     <ReactQuill
       value={value}
       onChange={(value)=> {
-        onChange(value)
+        onChange!(value)
       }}
       theme="snow"
       modules={{
