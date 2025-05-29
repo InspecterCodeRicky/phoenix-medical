@@ -165,6 +165,7 @@ const FormNotice = ({
                         value={field.value!}
                         onChange={debouncedOnChange}
                         placeholder="Mention"
+                        className="h-[400px]"
                       />
                     </FormControl>
                     <FormMessage />
@@ -190,7 +191,7 @@ const FormNotice = ({
       {isModal ? (
         <Dialog open={openSheet} onOpenChange={handleOpenChange}>
           <DialogContent
-            className="flex flex-col sm:max-w-[90%] h-[90vh] p-0 focus-visible:outline-none"
+            className="flex flex-col sm:max-w-[90%] md:h-[90vh] p-0 focus-visible:outline-none"
             onOpenAutoFocus={(e) => e.preventDefault()}
           >
             <DialogHeader className="hidden p-0">

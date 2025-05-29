@@ -8,8 +8,8 @@ import fadeIn from "@/lib/variants-motion";
 const Amenagement = () => {
   return (
     <div className="relative mt-36">
-      <div className="py-20 before:content-[''] before:absolute before:top-0 before:left-0 before:z-0 before:h-full before:w-full max-w-full lg:before:max-w-[70%] before:bg-card-foreground">
-        <div className="container relative grid grid-cols-1 lg:grid-cols-2 gap-20">
+      <div className="py-20 before:content-[''] before:absolute before:top-0 before:left-0 before:z-0 before:h-full before:w-full max-w-full md:before:max-w-[70%] before:bg-card-foreground">
+        <div className="container relative grid grid-cols-1 md:grid-cols-2 gap-20">
           <motion.div
             variants={fadeIn("up", 0.4)}
             initial="hidden"

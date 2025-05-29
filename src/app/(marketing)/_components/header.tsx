@@ -58,7 +58,7 @@ const Header = () => {
             }}
           >
             <Image
-              className="w-full h-10 object-contain"
+              className="w-full h-8 sm:h-10 object-contain"
               src="/img/logo.png"
               width={150}
               height={40}

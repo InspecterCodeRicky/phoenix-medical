@@ -8,6 +8,7 @@ import Amenagement from "@/app/(marketing)/(routes)/(home)/_strates/amenagement"
 import FAQ from "@/app/(marketing)/(routes)/(home)/_strates/faq";
 import Lea from "./_strates/lea";
 import Videos from "./_strates/videos";
+import Sponsors from "./_strates/sponsors";
 
 function Page() {
   return (
@@ -20,8 +21,8 @@ function Page() {
         <Lea />
         <Catalogue DontSavedScrollPosition={true}/>
         <Amenagement />
+        <Sponsors />
         <FAQ />
-        
       </div>
     </div>
   );

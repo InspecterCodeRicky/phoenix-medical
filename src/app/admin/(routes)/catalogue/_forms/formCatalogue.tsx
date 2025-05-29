@@ -234,6 +234,7 @@ const FormCatalogue = ({
                         value={field.value!}
                         onChange={field.onChange}
                         placeholder="Carateristics"
+                        className="h-[400px]"
                       />
                     </FormControl>
                     <FormMessage />

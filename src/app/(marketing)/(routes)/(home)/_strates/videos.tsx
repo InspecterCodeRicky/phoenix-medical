@@ -1,8 +1,4 @@
-import { motion } from "framer-motion";
-import fadeIn from "@/lib/variants-motion";
-import Image from "next/image";
 import PlayBtn from "@/app/(marketing)/_components/playBtn";
-import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,63 +7,95 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-const Videos = () => {
-  const [openDialogTMS, setOpenDialogTMS] = useState(false);
-  const [openDialogHapoBack, setOpenDialogHapoBack] = useState(false);
+import {
+  Card,
+  CardDescription,
+  CardHeader
+} from "@/components/ui/card";
 
-  const DialogHapoBack = () => {
+import fadeIn from "@/lib/variants-motion";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
+
+export interface PostModel {
+  type: "youtube" | "video";
+  thumbnail: string;
+  url: string;
+  title: string;
+  author: string;
+}
+
+const Videos = () => {
+  const [openVideo, setOpenVideo] = useState(false);
+  const [post, setPost] = useState<PostModel | undefined>();
+
+
+  const DialogVideo = () => {
     return (
-      <Dialog open={openDialogHapoBack} onOpenChange={setOpenDialogHapoBack}>
+      <Dialog open={openVideo} onOpenChange={setOpenVideo}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>HAPO BACK</DialogTitle>
+            <DialogTitle> {post?.title} </DialogTitle>
             <DialogDescription className="hidden"></DialogDescription>
           </DialogHeader>
           <div>
-            <video controls autoPlay className="rounded-lg">
-              <source src="https://wandering-sardine-131.convex.cloud/api/storage/9cda9800-2df4-4187-891d-613f68b8c8d0" type="video/mp4"/>
-            </video>
+            {post?.type == "video" ? (
+              <video controls autoPlay className="rounded-lg">
+                <source src={post?.url} type="video/mp4" />
+              </video>
+            ) : (
+              <iframe
+                className="rounded-lg"
+                width="100%"
+                height="300"
+                src={post?.url}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              ></iframe>
+            )}
           </div>
         </DialogContent>
       </Dialog>
     );
   };
-  const DialogTMS = () => {
-    return (
-      <Dialog open={openDialogTMS} onOpenChange={setOpenDialogTMS}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Prévetion santé</DialogTitle>
-            <DialogDescription className="hidden"></DialogDescription>
-          </DialogHeader>
-          <div>
-            <iframe
-              className="rounded-lg"
-              width="100%"
-              height="300"
-              src="https://www.youtube.com/embed/iY6R5Wbvtag"
-              title="Episode 1 : Les Troubles Musculo-Squelettiques #tms #travail #accompagnemenr"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            ></iframe>
-          </div>
-        </DialogContent>
-      </Dialog>
-    );
-  };
+
+  const blog: PostModel[] = [
+    {
+      type: "youtube",
+      thumbnail: "/img/posts/1.png",
+      url: "https://www.youtube.com/embed/iY6R5Wbvtag",
+      title: "Prévetion santé",
+      author: "SOS ECOUTE",
+    },
+    {
+      type: "video",
+      thumbnail: "/img/posts/2.png",
+      url: "https://wandering-sardine-131.convex.cloud/api/storage/9cda9800-2df4-4187-891d-613f68b8c8d0",
+      title: "HAPO BACK",
+      author: "Phoenix Médical",
+    },
+    {
+      type: "video",
+      thumbnail: "/img/posts/3.png",
+      url: "https://wandering-sardine-131.convex.cloud/api/storage/a1ddcfd7-5804-4a78-bb86-36ea179b214b",
+      title: "Utilisation de l'application Léa",
+      author: "Phoenix Médical",
+    },
+  ];
 
   return (
     <div className="container mt-36">
       <motion.h2
-        variants={fadeIn("up", 0.3)}
+        variants={fadeIn("down", 0.3)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.7 }}
-        className="text-primary text-5xl font-semibold md:text-center mb-2"
+        className="text-primary text-3xl font-medium md:text-center mb-2"
       >
         Santé et bien-être
       </motion.h2>
       <motion.p
-        variants={fadeIn("up", 0.4)}
+        variants={fadeIn("down", 0.4)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.7 }}
@@ -75,50 +103,45 @@ const Videos = () => {
       >
         Les Troubles Musculo-Squelettiques 🤕 et la présentation du HAPO BACK
       </motion.p>
-      <div className="mt-5 grid md:grid-cols-2 gap-5">
-        <motion.div
-          variants={fadeIn("right", 0.5)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.7 }}
-          className="relative"
-          onClick={() => setOpenDialogTMS(true)}
-          role="button"
-        >
-          <Image
-            className="rounded-xl w-full"
-            src="/img/illustration-TMS.png"
-            width={800}
-            height={500}
-            alt="TMS"
-          />
-          <div className="p-2 size-14 flex items-center justify-center absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-            <PlayBtn />
-          </div>
-        </motion.div>
-        <motion.div
-          variants={fadeIn("left", 0.5)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.7 }}
-          className="relative"
-          onClick={() => setOpenDialogHapoBack(true)}
-          role="button"
-        >
-          <Image
-            className="rounded-xl w-full"
-            src="/img/illustation-hapo-back.png"
-            width={800}
-            height={500}
-            alt="TMS"
-          />
-          <div className="p-2 size-14 flex items-center justify-center absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-            <PlayBtn />
-          </div>
-        </motion.div>
+      <div className="mt-5 grid md:grid-cols-3 gap-5">
+        {blog.map((post, index) => (
+          <motion.div
+            key={`post-${index}`}
+            variants={fadeIn("up", index *0.5)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.7 }}
+            className="relative group h-full"
+            onClick={() => {
+              setPost(post)
+              setOpenVideo(true)
+            }}
+            role="button"
+          >
+            <Card className="h-full border-none shadow-none bg-muted p-2 transition-transform duration-300 hover:scale-105">
+              <CardHeader className="p-1">
+                <div className="relative mb-2 overflow-hidden rounded-lg">
+                  <Image
+                    className="rounded-lg w-full transition-transform duration-300 transform group-hover:scale-105" // effet zoom
+                    src={post.thumbnail}
+                    width={500}
+                    height={800}
+                    alt="TMS"
+                  />
+                  <div className="p-2 size-2 flex items-center justify-center absolute bottom-4 right-4">
+                    <PlayBtn />
+                  </div>
+                </div>
+                <p className="font-semibold text-lg leading-none">
+                  {post.title}
+                </p>
+                <CardDescription>{post.author}</CardDescription>
+              </CardHeader>
+            </Card>
+          </motion.div>
+        ))}
       </div>
-      <DialogTMS />
-      <DialogHapoBack />
+      <DialogVideo/>
     </div>
   );
 };

@@ -21,14 +21,14 @@ function PlayBtn() {
         <motion.button
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.95 }}
-          className="relative z-10 p-4 rounded-full bg-green-500 text-white shadow-lg hover:bg-green-600 transition-all duration-300"
+          className="relative z-10 p-2 rounded-full bg-green-500 text-white shadow-lg hover:bg-green-600 transition-all duration-300"
         >
           <motion.div
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
             className="flex items-center justify-center"
           >
-            <Play className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+            <Play className="size-4 group-hover:scale-110 transition-transform duration-300" />
           </motion.div>
         </motion.button>
       </div>
