@@ -16,6 +16,7 @@ const Sponsors = () => {
     "/img/sponsors/conseil-depatemental-gp.jpeg",
     "/img/sponsors/bpi-france.jpeg",
     "/img/sponsors/union-eroupenne.jpeg",
+    "/img/sponsors/credit-agricole.jpeg",
   ];
 
   return (

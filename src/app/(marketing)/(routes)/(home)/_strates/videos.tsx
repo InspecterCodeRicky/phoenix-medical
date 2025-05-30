@@ -64,7 +64,7 @@ const Videos = () => {
       type: "youtube",
       thumbnail: "/img/posts/1.png",
       url: "https://www.youtube.com/embed/iY6R5Wbvtag",
-      title: "Prévetion santé",
+      title: "Prévention santé",
       author: "SOS ECOUTE",
     },
     {
